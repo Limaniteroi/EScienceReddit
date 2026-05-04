@@ -1,9 +1,7 @@
-```markdown
 # Proveniência em Dados de Saúde Mental em Redes Sociais
 
 Este repositório apresenta o trabalho final da disciplina **eScience 2026.1**. O projeto tem como foco a coleta reprodutível de dados do Reddit, com captura automática de proveniência utilizando a ferramenta **noWorkflow**.
 
----
 
 ## Motivação
 
@@ -16,7 +14,7 @@ Entretanto, identificamos uma lacuna crítica na literatura:
 
 Sem rastreabilidade, os experimentos tornam-se verdadeiras **“caixas pretas”**.
 
----
+
 
 ## Objetivos
 
@@ -26,7 +24,7 @@ O objetivo principal deste projeto é realizar a coleta de dados com **proveniê
 - **Proveniência:** Empregar o noWorkflow para registrar automaticamente a linhagem dos dados.
 - **Transparência:** Disponibilizar um repositório público com código documentado e demonstração funcional.
 
----
+
 
 ## Metodologia
 
@@ -50,7 +48,7 @@ O fluxo de trabalho está estruturado em quatro etapas principais:
 4. **Visualização**  
    Geração de um grafo detalhado representando toda a cadeia de dados, desde a coleta via API até os resultados finais.
 
----
+
 
 ## Entregáveis
 
@@ -58,7 +56,7 @@ O fluxo de trabalho está estruturado em quatro etapas principais:
 - **Visualização:** Grafo de proveniência representando todo o fluxo de dados  
 - **Repositório:** Código documentado com instruções de uso e demonstração funcional  
 
----
+
 
 # Cronograma (Resumo)
 
@@ -71,7 +69,7 @@ O fluxo de trabalho está estruturado em quatro etapas principais:
 - **Finalização (Semanas 5–7):**  
   Refinamento dos grafos, testes e preparação da apresentação  
 
----
+
 
 ## Equipe
 

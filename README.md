@@ -1,55 +1,83 @@
-#Proveniência em Dados de Saúde Mental em Redes Sociais
-Este repositório apresenta o trabalho final da disciplina eScience 2026.1. O foco do projeto é a coleta reprodutível de dados do Reddit através da captura automática de proveniência, utilizando a ferramenta noWorkflow.  
+```markdown
+# Proveniência em Dados de Saúde Mental em Redes Sociais
 
-##Motivação
-O Reddit é uma plataforma onde o anonimato gera dados únicos sobre saúde mental, com relatos que muitas vezes não aparecem em surveys clínicos tradicionais. No entanto, identificamos uma lacuna crítica: a falta de rastreabilidade e reprodutibilidade nos estudos que utilizam esses dados.  
+Este repositório apresenta o trabalho final da disciplina **eScience 2026.1**. O projeto tem como foco a coleta reprodutível de dados do Reddit, com captura automática de proveniência utilizando a ferramenta **noWorkflow**.
 
-Estudos Prévios: Pelo menos 54 estudos científicos já utilizaram dados do Reddit para pesquisar depressão e ansiedade.  
+---
 
-Problema Identificado: Sem registro de data, hora, filtros de API e transformações, os experimentos tornam-se "caixas pretas" impossíveis de replicar.  
+## Motivação
 
-##Objetivos
-O objetivo principal é coletar dados de saúde mental com proveniência registrada:  
+O Reddit é uma plataforma que, devido ao anonimato dos usuários, concentra relatos espontâneos e autênticos sobre saúde mental — muitos deles não capturados por métodos tradicionais, como surveys clínicos.
 
-Coleta: Utilizar Python + PRAW para capturar posts públicos via API do Reddit.  
+Entretanto, identificamos uma lacuna crítica na literatura:
 
-Proveniência: Usar o noWorkflow para capturar automaticamente a linhagem dos dados.  
+- **Estudos prévios:** Pelo menos 54 estudos científicos já utilizaram dados do Reddit para investigar depressão e ansiedade.
+- **Problema:** A ausência de registro detalhado (data, hora, parâmetros da API e etapas de processamento) torna esses estudos pouco transparentes e difíceis de reproduzir.
 
-Transparência: Disponibilizar um repositório público no GitHub com uma demonstração funcional.  
+Sem rastreabilidade, os experimentos tornam-se verdadeiras **“caixas pretas”**.
 
-##Metodologia
-O fluxo de trabalho está dividido em quatro etapas principais:  
+---
 
-Coleta: Extração de posts dos subreddits r/depression, r/anxiety e r/mentalhealth.  
+## Objetivos
 
-Registro: Execução via noWorkflow para capturar a proveniência sem alterar o código original.  
+O objetivo principal deste projeto é realizar a coleta de dados com **proveniência completa e rastreável**, garantindo transparência e reprodutibilidade.
 
-Processamento: Limpeza e transformação dos dados com rastreio de cada etapa no grafo.  
+- **Coleta:** Utilizar Python + PRAW para capturar posts públicos via API do Reddit.
+- **Proveniência:** Empregar o noWorkflow para registrar automaticamente a linhagem dos dados.
+- **Transparência:** Disponibilizar um repositório público com código documentado e demonstração funcional.
 
-Visualização: Geração do grafo de proveniência completo, desde a API até os dados finais.  
+---
 
-##Entregáveis
+## Metodologia
 
-Script Python: Pipeline de coleta completo e parametrizável.  
+O fluxo de trabalho está estruturado em quatro etapas principais:
 
-Visualização: Grafo de proveniência detalhando a cadeia de dados.  
+1. **Coleta**  
+   Extração de posts dos subreddits:
+   - r/depression  
+   - r/anxiety  
+   - r/mentalhealth  
 
-Repositório: Código documentado com instruções de uso e demo ao vivo.  
+2. **Registro de Proveniência**  
+   Execução do pipeline com noWorkflow, capturando automaticamente:
+   - Parâmetros de execução  
+   - Dependências  
+   - Transformações aplicadas  
 
+3. **Processamento**  
+   Limpeza e transformação dos dados com rastreamento completo de cada etapa no grafo de proveniência.
 
-##Cronograma (Resumo)
+4. **Visualização**  
+   Geração de um grafo detalhado representando toda a cadeia de dados, desde a coleta via API até os resultados finais.
 
-Configuração (Sem. 2): PRAW, noWorkflow e API do Reddit.  
+---
 
-Implementação (Sem. 3-4): Coleta, captura e análise da proveniência.  
+## Entregáveis
 
-Finalização (Sem. 5-7): Refinamento dos grafos e apresentação final.  
+- **Script em Python:** Pipeline completo de coleta e processamento, com parâmetros configuráveis  
+- **Visualização:** Grafo de proveniência representando todo o fluxo de dados  
+- **Repositório:** Código documentado com instruções de uso e demonstração funcional  
 
-##Equipe
-Giovana Beltrame   
-Julia Staudohar   
-Marianna Brito   
+---
 
+# Cronograma (Resumo)
 
-Graduação em eScience   
-+1
+- **Configuração (Semana 2):**  
+  Setup do PRAW, noWorkflow e acesso à API do Reddit  
+
+- **Implementação (Semanas 3–4):**  
+  Desenvolvimento da coleta e captura da proveniência  
+
+- **Finalização (Semanas 5–7):**  
+  Refinamento dos grafos, testes e preparação da apresentação  
+
+---
+
+## Equipe
+
+- Giovana Beltrame  
+- Julia Staudohar  
+- Marianna Brito  
+
+**Graduação em eScience**
+```

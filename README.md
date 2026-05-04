@@ -78,4 +78,3 @@ O fluxo de trabalho está estruturado em quatro etapas principais:
 - Marianna Brito  
 
 **Graduação em eScience**
-```

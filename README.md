@@ -24,6 +24,41 @@ O objetivo principal deste projeto é realizar a coleta de dados com **proveniê
 - **Proveniência:** Empregar o noWorkflow para registrar automaticamente a linhagem dos dados.
 - **Transparência:** Disponibilizar um repositório público com código documentado e demonstração funcional.
 
+## Instalação
+
+### Requisitos
+- Python 3.11 (recomendado — versões mais novas podem causar incompatibilidade com o noWorkflow)
+- pip
+- virtualenv
+
+### Passo a passo
+
+1. Clone o repositório:
+```bash
+   git clone <url-do-repositorio>
+   cd EScienceReddit
+```
+
+2. Crie e ative o ambiente virtual com Python 3.11:
+```bash
+   python3.11 -m venv venv
+   source venv/bin/activate
+```
+
+3. Instale as dependências:
+```bash
+   pip install "setuptools<68"
+   pip install "noworkflow[all]"
+   pip install praw
+```
+   > ⚠️ O `setuptools<68` é necessário para resolver incompatibilidade do noWorkflow com versões mais novas do pip.
+
+4. Verifique a instalação do noWorkflow:
+```bash
+   now --version
+```
+   Deve retornar: `noWorkflow 2.0.1`
+
 
 
 ## Metodologia

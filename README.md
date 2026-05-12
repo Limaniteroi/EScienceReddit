@@ -112,6 +112,37 @@ A escolha do Reddit como fonte de dados é embasada na literatura científica:
   do anonimato da plataforma para capturar perspectivas sub-representadas em dados clínicos.
 
 
+## Como Executar
+
+1. Clone o repositório e siga as instruções de instalação acima
+2. Coloque o dataset na pasta `data/` com o nome `data_to_be_cleansed.csv`
+3. Ative o ambiente virtual:
+```bash
+   source venv/bin/activate
+```
+4. Execute o pipeline com o noWorkflow:
+```bash
+   now run coletar.py
+```
+5. Verifique a proveniência capturada:
+```bash
+   now list
+   now show 1
+```
+6. Visualize o grafo de proveniência:
+```bash
+   now vis
+```
+   Acesse `http://127.0.0.1:5000` no navegador.
+
+## Grafo de Proveniência
+
+O grafo abaixo mostra toda a cadeia de execução registrada pelo noWorkflow —
+desde a leitura do dataset bruto até o salvamento do CSV limpo.
+
+![Grafo de Proveniência](imagens/grafo_proveniencia.png)
+
+
 
 ## Entregáveis
 

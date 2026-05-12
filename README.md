@@ -84,6 +84,34 @@ O fluxo de trabalho está estruturado em quatro etapas principais:
    Geração de um grafo detalhado representando toda a cadeia de dados, desde a coleta via API até os resultados finais.
 
 
+## Fonte de Dados
+
+### Opção Principal — Reddit API (PRAW)
+A coleta primária será feita via API oficial do Reddit usando a biblioteca PRAW.
+O acesso à API está sendo solicitado formalmente ao Reddit para fins acadêmicos.
+
+**Status:** aguardando aprovação do Reddit Data API Team.
+
+### Plano B — Dataset Público (Kaggle)
+Caso o acesso à API não seja aprovado dentro do prazo do projeto, utilizaremos
+um dataset público disponível no Kaggle contendo posts de subreddits de saúde mental.
+
+Esta alternativa é igualmente válida para os objetivos do projeto, pois o foco
+do trabalho é a **captura de proveniência do processamento dos dados** — não a
+coleta em si. O noWorkflow registrará todas as etapas de transformação
+independentemente da fonte dos dados.
+
+**Dataset de referência:** [Mental Health Reddit Dataset — Kaggle](https://www.kaggle.com/datasets/neelghoshal/reddit-mental-health-data)
+
+### Justificativa
+A escolha do Reddit como fonte de dados é embasada na literatura científica:
+- **Boettcher et al. (2021)** — *JMIR Mental Health*: revisão sistemática com 54 estudos
+  que usaram dados do Reddit para pesquisar depressão e ansiedade.
+- **Evkoski et al. (2026)** — *Journal of Medical Internet Research*: análise de rede
+  com dados de 545 mil usuários em 114 subreddits de saúde mental, destacando o valor
+  do anonimato da plataforma para capturar perspectivas sub-representadas em dados clínicos.
+
+
 
 ## Entregáveis
 

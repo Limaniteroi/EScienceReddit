@@ -1,0 +1,4 @@
+def ler_dataset(arquivo):
+    if arquivo.endswith(".xlsx"):
+        return pd.read_excel(arquivo)
+    return pd.read_csv(arquivo)

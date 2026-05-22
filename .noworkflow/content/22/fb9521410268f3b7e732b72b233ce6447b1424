@@ -1,0 +1,3 @@
+def limpar_colunas_indesejadas(df):
+    colunas_indesejadas = [coluna for coluna in df.columns if coluna.startswith("Unnamed:")]
+    return df.drop(columns=colunas_indesejadas)

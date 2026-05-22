@@ -1,6 +1,5 @@
 import os
 import re
-from datetime import datetime
 
 import pandas as pd
 
@@ -11,7 +10,6 @@ INPUT_FILES = [
     os.path.join(DATA_DIR, "data_to_be_cleansed.csv"),
 ]
 OUTPUT_FILE = os.path.join(DATA_DIR, "posts_limpos.csv")
-REPORT_FILE = os.path.join(DATA_DIR, "relatorio.txt")
 REQUIRED_COLUMNS = {"text", "title", "target"}
 TEXT_COLUMNS = ["text", "title"]
 OUTPUT_SEPARATOR = ";"
@@ -66,43 +64,11 @@ def salvar_csv(df, arquivo):
     df.to_csv(arquivo, index=False, sep=OUTPUT_SEPARATOR, encoding="utf-8-sig")
 
 
-def gerar_relatorio(total_original, df, distribuicao, tamanho_medio, arquivos_gerados):
-    print("\nGerando relatorio...")
-
-    relatorio = f"""RELATORIO DE EXECUCAO - coletar.py
-Data/hora: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-
-LEITURA
-Posts carregados: {total_original}
-
-LIMPEZA
-Posts apos limpeza: {len(df)}
-Posts removidos: {total_original - len(df)}
-
-DISTRIBUICAO POR CATEGORIA
-{distribuicao.to_string()}
-
-TAMANHO MEDIO DOS TEXTOS POR CATEGORIA
-{tamanho_medio.to_string()}
-
-ARQUIVOS GERADOS
-"""
-
-    for arquivo in arquivos_gerados:
-        relatorio += f"  {arquivo}\n"
-
-    with open(REPORT_FILE, "w", encoding="utf-8") as arquivo:
-        arquivo.write(relatorio)
-
-    print(f"Relatorio salvo em {REPORT_FILE}")
-
-
 def main():
     print("Lendo o dataset...")
 
     arquivo_entrada = encontrar_dataset()
     df = ler_dataset(arquivo_entrada)
-    total_original = len(df)
     df = limpar_colunas_indesejadas(df)
 
     colunas_faltantes = REQUIRED_COLUMNS.difference(df.columns)
@@ -147,23 +113,18 @@ def main():
 
     os.makedirs(DATA_DIR, exist_ok=True)
     categorias = df["target"].dropna().unique()
-    arquivos_gerados = []
 
     for categoria in categorias:
         subset = df[df["target"] == categoria]
         nome_arquivo = os.path.join(DATA_DIR, f"posts_{normalizar_nome_arquivo(categoria)}.csv")
         salvar_csv(subset, nome_arquivo)
-        arquivos_gerados.append(nome_arquivo)
         print(f"Salvo: {nome_arquivo} ({len(subset)} posts)")
 
     # 4. Salvamento
     print("\nSalvando dados limpos...")
     salvar_csv(df, OUTPUT_FILE)
-    arquivos_gerados.insert(0, OUTPUT_FILE)
 
     print(f"Concluido! Arquivo salvo em {OUTPUT_FILE}")
-    gerar_relatorio(total_original, df, distribuicao, tamanho_medio, arquivos_gerados)
-    print("\nPipeline concluido com sucesso!")
 
 
 if __name__ == "__main__":

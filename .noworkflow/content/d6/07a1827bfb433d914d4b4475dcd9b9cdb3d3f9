@@ -1,0 +1,7 @@
+def normalizar_nome_arquivo(valor):
+    if valor in TARGET_LABELS:
+        return TARGET_LABELS[valor]
+
+    nome = str(valor).strip().lower()
+    nome = re.sub(r"[^a-z0-9_-]+", "_", nome)
+    return nome.strip("_") or "sem_categoria"

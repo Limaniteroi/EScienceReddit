@@ -1,0 +1,4 @@
+def normalizar_textos(df):
+    for coluna in TEXT_COLUMNS:
+        df[coluna] = df[coluna].astype(str).str.replace(r"\s+", " ", regex=True).str.strip()
+    return df

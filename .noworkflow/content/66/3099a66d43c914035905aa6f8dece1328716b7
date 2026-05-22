@@ -1,0 +1,10 @@
+def encontrar_dataset():
+    for arquivo in INPUT_FILES:
+        if os.path.exists(arquivo) and os.path.getsize(arquivo) > 0:
+            return arquivo
+
+    nomes_esperados = " ou ".join(str(arquivo) for arquivo in INPUT_FILES)
+    raise FileNotFoundError(
+        f"Arquivo de entrada nao encontrado: {nomes_esperados}. "
+        "Crie a pasta data/ e coloque o dataset com um desses nomes."
+    )

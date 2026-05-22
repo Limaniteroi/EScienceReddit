@@ -1,0 +1,61 @@
+def main():
+    print("Lendo o dataset...")
+
+    arquivo_entrada = encontrar_dataset()
+    df = ler_dataset(arquivo_entrada)
+    df = limpar_colunas_indesejadas(df)
+
+    colunas_faltantes = REQUIRED_COLUMNS.difference(df.columns)
+    if colunas_faltantes:
+        raise ValueError(
+            "O dataset nao possui as colunas obrigatorias: "
+            f"{sorted(colunas_faltantes)}. Colunas encontradas: {list(df.columns)}"
+        )
+
+    print(f"Total de posts carregados: {len(df)}")
+    print(f"Colunas disponiveis: {list(df.columns)}")
+
+    # 1. Limpeza
+    print("\nLimpando os dados...")
+
+    # Remove linhas sem texto e sem titulo
+    df = df.dropna(subset=["text", "title"])
+
+    # Garante textos em uma unica linha para evitar colunas quebradas ao abrir no Excel
+    df = normalizar_textos(df)
+
+    # Remove duplicatas
+    df = df.drop_duplicates(subset=["text"])
+
+    # Remove posts com texto muito curto (menos de 20 caracteres)
+    df = df[df["text"].str.len() >= 20]
+
+    print(f"Total apos limpeza: {len(df)}")
+
+    # 2. Analise exploratoria
+    distribuicao = df["target"].value_counts()
+    print(f"\nDistribuicao por categoria:\n{distribuicao}")
+
+    tamanho_medio = df.groupby("target")["text"].apply(lambda x: x.str.len().mean()).round(0)
+    print(f"\nTamanho medio dos textos: {tamanho_medio} caracteres")
+
+    total_palavras = df["text"].str.split().explode().nunique()
+    print(f"\nTotal de palavras unicas: {total_palavras}")
+
+    # 3. Separacao por categoria
+    print("\nSeparando por categoria...")
+
+    os.makedirs(DATA_DIR, exist_ok=True)
+    categorias = df["target"].dropna().unique()
+
+    for categoria in categorias:
+        subset = df[df["target"] == categoria]
+        nome_arquivo = os.path.join(DATA_DIR, f"posts_{normalizar_nome_arquivo(categoria)}.csv")
+        salvar_csv(subset, nome_arquivo)
+        print(f"Salvo: {nome_arquivo} ({len(subset)} posts)")
+
+    # 4. Salvamento
+    print("\nSalvando dados limpos...")
+    salvar_csv(df, OUTPUT_FILE)
+
+    print(f"Concluido! Arquivo salvo em {OUTPUT_FILE}")

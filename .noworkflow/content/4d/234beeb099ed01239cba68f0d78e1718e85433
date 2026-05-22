@@ -1,0 +1,2 @@
+def salvar_csv(df, arquivo):
+    df.to_csv(arquivo, index=False, sep=OUTPUT_SEPARATOR, encoding="utf-8-sig")

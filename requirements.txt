@@ -1,0 +1,8 @@
+setuptools<68
+noworkflow[all]==2.0.1
+praw
+pandas
+openpyxl
+kagglehub
+certifi
+pip-system-certs

@@ -1,0 +1,32 @@
+def gerar_relatorio(total_original, df, distribuicao, tamanho_medio, arquivos_gerados):
+    print("\nGerando relatorio...")
+
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    total_apos = len(df)
+    total_removidos = total_original - len(df)
+    dist_str = distribuicao.to_string()
+    tamanho_str = tamanho_medio.to_string()
+    arquivos_str = ""
+    for arquivo in arquivos_gerados:
+        arquivos_str += "  " + arquivo + "\n"
+
+    relatorio = (
+        "RELATORIO DE EXECUCAO - coletar.py\n"
+        "Data/hora: " + agora + "\n\n"
+        "LEITURA\n"
+        "Posts carregados: " + str(total_original) + "\n\n"
+        "LIMPEZA\n"
+        "Posts apos limpeza: " + str(total_apos) + "\n"
+        "Posts removidos: " + str(total_removidos) + "\n\n"
+        "DISTRIBUICAO POR CATEGORIA\n"
+        + dist_str + "\n\n"
+        "TAMANHO MEDIO DOS TEXTOS POR CATEGORIA\n"
+        + tamanho_str + "\n\n"
+        "ARQUIVOS GERADOS\n"
+        + arquivos_str
+    )
+
+    with open(REPORT_FILE, "w", encoding="utf-8") as arquivo:
+        arquivo.write(relatorio)
+
+    print("Relatorio salvo em " + REPORT_FILE)

@@ -69,35 +69,32 @@ def salvar_csv(df, arquivo):
 def gerar_relatorio(total_original, df, distribuicao, tamanho_medio, arquivos_gerados):
     print("\nGerando relatorio...")
 
-    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    total_apos = len(df)
-    total_removidos = total_original - len(df)
-    dist_str = distribuicao.to_string()
-    tamanho_str = tamanho_medio.to_string()
-    arquivos_str = ""
-    for arquivo in arquivos_gerados:
-        arquivos_str += "  " + arquivo + "\n"
+    relatorio = f"""RELATORIO DE EXECUCAO - coletar.py
+Data/hora: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-    relatorio = (
-        "RELATORIO DE EXECUCAO - coletar.py\n"
-        "Data/hora: " + agora + "\n\n"
-        "LEITURA\n"
-        "Posts carregados: " + str(total_original) + "\n\n"
-        "LIMPEZA\n"
-        "Posts apos limpeza: " + str(total_apos) + "\n"
-        "Posts removidos: " + str(total_removidos) + "\n\n"
-        "DISTRIBUICAO POR CATEGORIA\n"
-        + dist_str + "\n\n"
-        "TAMANHO MEDIO DOS TEXTOS POR CATEGORIA\n"
-        + tamanho_str + "\n\n"
-        "ARQUIVOS GERADOS\n"
-        + arquivos_str
-    )
+LEITURA
+Posts carregados: {total_original}
+
+LIMPEZA
+Posts apos limpeza: {len(df)}
+Posts removidos: {total_original - len(df)}
+
+DISTRIBUICAO POR CATEGORIA
+{distribuicao.to_string()}
+
+TAMANHO MEDIO DOS TEXTOS POR CATEGORIA
+{tamanho_medio.to_string()}
+
+ARQUIVOS GERADOS
+"""
+
+    for arquivo in arquivos_gerados:
+        relatorio += f"  {arquivo}\n"
 
     with open(REPORT_FILE, "w", encoding="utf-8") as arquivo:
         arquivo.write(relatorio)
 
-    print("Relatorio salvo em " + REPORT_FILE)
+    print(f"Relatorio salvo em {REPORT_FILE}")
 
 
 def main():
@@ -115,8 +112,8 @@ def main():
             f"{sorted(colunas_faltantes)}. Colunas encontradas: {list(df.columns)}"
         )
 
-    print("Total de posts carregados: " + str(len(df)))
-    print("Colunas disponiveis: " + str(list(df.columns)))
+    print(f"Total de posts carregados: {len(df)}")
+    print(f"Colunas disponiveis: {list(df.columns)}")
 
     # 1. Limpeza
     print("\nLimpando os dados...")
@@ -133,17 +130,17 @@ def main():
     # Remove posts com texto muito curto (menos de 20 caracteres)
     df = df[df["text"].str.len() >= 20]
 
-    print("Total apos limpeza: " + str(len(df)))
+    print(f"Total apos limpeza: {len(df)}")
 
     # 2. Analise exploratoria
     distribuicao = df["target"].value_counts()
     print(f"\nDistribuicao por categoria:\n{distribuicao}")
 
     tamanho_medio = df.groupby("target")["text"].apply(lambda x: x.str.len().mean()).round(0)
-    print("Tamanho medio dos textos: " + str(tamanho_medio) + " caracteres")
+    print(f"\nTamanho medio dos textos: {tamanho_medio} caracteres")
 
     total_palavras = df["text"].str.split().explode().nunique()
-    print("Total de palavras unicas: " + str(total_palavras))
+    print(f"\nTotal de palavras unicas: {total_palavras}")
 
     # 3. Separacao por categoria
     print("\nSeparando por categoria...")
@@ -157,7 +154,7 @@ def main():
         nome_arquivo = os.path.join(DATA_DIR, f"posts_{normalizar_nome_arquivo(categoria)}.csv")
         salvar_csv(subset, nome_arquivo)
         arquivos_gerados.append(nome_arquivo)
-        print("Salvo: " + nome_arquivo + " (" + str(len(subset)) + " posts)")
+        print(f"Salvo: {nome_arquivo} ({len(subset)} posts)")
 
     # 4. Salvamento
     print("\nSalvando dados limpos...")
